@@ -16,7 +16,12 @@
 
 **/
 
-#include "CS3113/Levels.h"
+#include "CS3113/LevelA.h"
+#include "CS3113/LevelB.h"
+#include "CS3113/LevelC.h"
+#include "CS3113/MenuScene.h"
+#include "CS3113/LoseScene.h"
+#include "CS3113/WinScene.h"
 
 // Global Constants
 constexpr int SCREEN_WIDTH  = 1000,
@@ -63,7 +68,7 @@ void switchToScene(Scene *scene)
     gCurrentScene->initialise();
 
     // camera starts on player (clamped to level)
-    // no player (menu/lose/win) --> window 
+    // no player (menu/lose/win) --> window centre
     gCamera.target = { ORIGIN.x, ORIGIN.y };
 
     if (gCurrentScene->getState().player != nullptr)
@@ -93,7 +98,6 @@ void initialise()
     SetMusicVolume(gBGM, 0.33f);
     PlayMusicStream(gBGM); // music loops by default
 
-    // init scenes
     gLevels[LEVEL_A] = new LevelA(ORIGIN, "#C0897E");
     gLevels[LEVEL_B] = new LevelB(ORIGIN, "#011627");
     gLevels[LEVEL_C] = new LevelC(ORIGIN, "#2E294E");
@@ -119,11 +123,11 @@ void processInput()
     if (player != nullptr)
     {
         player->resetMovement();
-        // horiz movement
+
         if      (IsKeyDown(KEY_A)) player->moveLeft();
         else if (IsKeyDown(KEY_D)) player->moveRight();
 
-        if (IsKeyPressed(KEY_W) && player->isCollidingBottom()) // jump
+        if (IsKeyPressed(KEY_W) && player->isCollidingBottom())
         {
             player->jump();
             PlaySound(gJumpSound);
@@ -185,6 +189,7 @@ void update()
     {
         UpdateMusicStream(gBGM);
 
+        // Look at how beautiful this is:
         gCurrentScene->update(FIXED_TIMESTEP);
         deltaTime -= FIXED_TIMESTEP;
 
@@ -242,7 +247,7 @@ void render()
     // hud --> lives & level #, levels only
     if (gCurrentScene->getState().map != nullptr)
     {
-        // which level
+        // which level? (LEVEL_A = 0 --> +1)
         int levelNumber = 0;
         for (std::pair<const SceneID, Scene *> &entry : gLevels)
             if (entry.second == gCurrentScene) levelNumber = entry.first + 1;

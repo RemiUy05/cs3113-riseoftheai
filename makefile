@@ -25,9 +25,34 @@ ifeq ($(wildcard CS3113/Scene.cpp),CS3113/Scene.cpp)
     SRCS += CS3113/Scene.cpp
 endif
 
-# Add the Levels library if it exists
-ifeq ($(wildcard CS3113/Levels.cpp),CS3113/Levels.cpp)
-    SRCS += CS3113/Levels.cpp
+# Add the LevelA library if it exists
+ifeq ($(wildcard CS3113/LevelA.cpp),CS3113/LevelA.cpp)
+    SRCS += CS3113/LevelA.cpp
+endif
+
+# Add the LevelB library if it exists
+ifeq ($(wildcard CS3113/LevelB.cpp),CS3113/LevelB.cpp)
+    SRCS += CS3113/LevelB.cpp
+endif
+
+# Add the LevelC library if it exists
+ifeq ($(wildcard CS3113/LevelC.cpp),CS3113/LevelC.cpp)
+    SRCS += CS3113/LevelC.cpp
+endif
+
+# Add the MenuScene library if it exists
+ifeq ($(wildcard CS3113/MenuScene.cpp),CS3113/MenuScene.cpp)
+    SRCS += CS3113/MenuScene.cpp
+endif
+
+# Add the LoseScene library if it exists
+ifeq ($(wildcard CS3113/LoseScene.cpp),CS3113/LoseScene.cpp)
+    SRCS += CS3113/LoseScene.cpp
+endif
+
+# Add the WinScene library if it exists
+ifeq ($(wildcard CS3113/WinScene.cpp),CS3113/WinScene.cpp)
+    SRCS += CS3113/WinScene.cpp
 endif
 
 # Default values

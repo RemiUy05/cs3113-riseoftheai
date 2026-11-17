@@ -5,6 +5,17 @@
 
 constexpr int MAX_ENEMIES = 8;
 
+// where each enemy starts (level px), ai type,
+// & range --> wake distance (followers/flyers)
+// or jump power (jumpers)
+struct EnemySpawn
+{
+    float  x;
+    float  y;
+    AIType type;
+    float  range;
+};
+
 struct GameState
 {
     Entity *player;
